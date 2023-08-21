@@ -10,10 +10,9 @@ public class DateParse {
     /**
      * Generate current local time.
      *
-     * @param date the date
      * @return the local date time
      */
-    public static LocalDateTime generateCurrentLocalTime(LocalDateTime date){
+    public static LocalDateTime generateCurrentLocalTime(){
         return LocalDateTime.now();
     }
 

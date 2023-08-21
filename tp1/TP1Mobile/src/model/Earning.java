@@ -13,8 +13,14 @@ import java.util.UUID;
 public class Earning {
 
     private UUID uuid;
-    private int financeId; // finance_id in db
+    private UUID financeId; // finance_id in db
     private double value;
+
+    public Earning(UUID uuid, UUID financeId, double value) {
+        this.uuid = uuid;
+        this.financeId = financeId;
+        this.value = value;
+    }
 
     public UUID getUuid() {
         return uuid;
@@ -24,11 +30,11 @@ public class Earning {
         this.uuid = uuid;
     }
 
-    public int getId() {
+    public UUID getFinanceId() {
         return financeId;
     }
 
-    public void setId(int id) {
+    public void setFinanceId(UUID id) {
         this.financeId = id;
     }
 

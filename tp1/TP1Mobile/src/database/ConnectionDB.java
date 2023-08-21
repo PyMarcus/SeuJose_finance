@@ -3,9 +3,11 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 import org.apache.commons.configuration2.INIConfiguration;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.ex.ConfigurationException;
+import util.FLogger;
 
 /**
  * The type Connection db that create
@@ -29,6 +31,8 @@ public class ConnectionDB{
      * @throws SQLException the sql exception
      */
     public static Connection getConnection(String enviroment) throws SQLException{
+        Logger logger = FLogger.getLogger();
+        logger.info("Connected with " + enviroment);
         getCredentials(enviroment);
         switch (enviroment){
             case "production":

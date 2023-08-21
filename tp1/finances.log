@@ -1,0 +1,102 @@
+Aug 20, 2023 10:34:26 PM database.ConnectionDB getConnection
+INFO: Connected with production
+Aug 20, 2023 10:34:26 PM dao.impl.FinanceDAOImpl getAllFinances
+INFO: Successfully connected into production database.
+Aug 20, 2023 10:34:26 PM dao.impl.FinanceDAOImpl getAllFinances
+INFO: Result from complete finances: 4
+Aug 20, 2023 10:34:36 PM database.ConnectionDB getConnection
+INFO: Connected with production
+Aug 20, 2023 10:34:36 PM dao.impl.EarningDAOImpl getTotalEarnings
+INFO: Successfully connected into production database.
+Aug 20, 2023 10:34:36 PM dao.impl.EarningDAOImpl getTotalEarnings
+INFO: Result from complete earnings: 211.05
+Aug 20, 2023 10:34:36 PM database.ConnectionDB getConnection
+INFO: Connected with production
+Aug 20, 2023 10:34:36 PM dao.impl.SpendingDAOImpl getTotalSpendings
+INFO: Successfully connected into production database.
+Aug 20, 2023 10:34:36 PM dao.impl.SpendingDAOImpl getTotalSpendings
+INFO: Result from complete spendings: 100.05
+Aug 20, 2023 10:34:36 PM database.ConnectionDB getConnection
+INFO: Connected with production
+Aug 20, 2023 10:34:36 PM dao.impl.EarningDAOImpl getTotalEarnings
+INFO: Successfully connected into production database.
+Aug 20, 2023 10:34:36 PM dao.impl.EarningDAOImpl getTotalEarnings
+INFO: Result from complete earnings: 211.05
+Aug 20, 2023 10:34:36 PM database.ConnectionDB getConnection
+INFO: Connected with production
+Aug 20, 2023 10:34:36 PM dao.impl.SpendingDAOImpl getTotalSpendings
+INFO: Successfully connected into production database.
+Aug 20, 2023 10:34:36 PM dao.impl.SpendingDAOImpl getTotalSpendings
+INFO: Result from complete spendings: 100.05
+Aug 20, 2023 10:35:46 PM database.ConnectionDB getConnection
+INFO: Connected with production
+Aug 20, 2023 10:35:46 PM dao.impl.FinanceDAOImpl getAllFinances
+INFO: Successfully connected into production database.
+Aug 20, 2023 10:35:46 PM dao.impl.FinanceDAOImpl getAllFinances
+INFO: Result from complete finances: 4
+Aug 20, 2023 10:35:46 PM database.ConnectionDB getConnection
+INFO: Connected with production
+Aug 20, 2023 10:35:46 PM dao.impl.EarningDAOImpl getTotalEarnings
+INFO: Successfully connected into production database.
+Aug 20, 2023 10:35:46 PM dao.impl.EarningDAOImpl getTotalEarnings
+INFO: Result from complete earnings: 211.05
+Aug 20, 2023 10:35:46 PM database.ConnectionDB getConnection
+INFO: Connected with production
+Aug 20, 2023 10:35:46 PM dao.impl.SpendingDAOImpl getTotalSpendings
+INFO: Successfully connected into production database.
+Aug 20, 2023 10:35:46 PM dao.impl.SpendingDAOImpl getTotalSpendings
+INFO: Result from complete spendings: 100.05
+Aug 20, 2023 10:35:46 PM database.ConnectionDB getConnection
+INFO: Connected with production
+Aug 20, 2023 10:35:46 PM dao.impl.EarningDAOImpl getTotalEarnings
+INFO: Successfully connected into production database.
+Aug 20, 2023 10:35:46 PM dao.impl.EarningDAOImpl getTotalEarnings
+INFO: Result from complete earnings: 211.05
+Aug 20, 2023 10:35:46 PM database.ConnectionDB getConnection
+INFO: Connected with production
+Aug 20, 2023 10:35:46 PM dao.impl.SpendingDAOImpl getTotalSpendings
+INFO: Successfully connected into production database.
+Aug 20, 2023 10:35:46 PM dao.impl.SpendingDAOImpl getTotalSpendings
+INFO: Result from complete spendings: 100.05
+Aug 20, 2023 10:36:42 PM database.ConnectionDB getConnection
+INFO: Connected with production
+Aug 20, 2023 10:36:42 PM dao.impl.FinanceDAOImpl getAllFinances
+INFO: Successfully connected into production database.
+Aug 20, 2023 10:36:42 PM dao.impl.FinanceDAOImpl getAllFinances
+INFO: Result from complete finances: 4
+Aug 20, 2023 10:36:42 PM database.ConnectionDB getConnection
+INFO: Connected with production
+Aug 20, 2023 10:36:42 PM dao.impl.EarningDAOImpl getTotalEarnings
+INFO: Successfully connected into production database.
+Aug 20, 2023 10:36:42 PM dao.impl.EarningDAOImpl getTotalEarnings
+INFO: Result from complete earnings: 211.05
+Aug 20, 2023 10:37:51 PM database.ConnectionDB getConnection
+INFO: Connected with production
+Aug 20, 2023 10:37:51 PM dao.impl.FinanceDAOImpl getAllFinances
+INFO: Successfully connected into production database.
+Aug 20, 2023 10:37:51 PM dao.impl.FinanceDAOImpl getAllFinances
+INFO: Result from complete finances: 4
+Aug 20, 2023 10:37:51 PM database.ConnectionDB getConnection
+INFO: Connected with production
+Aug 20, 2023 10:37:51 PM dao.impl.EarningDAOImpl getTotalEarnings
+INFO: Successfully connected into production database.
+Aug 20, 2023 10:37:51 PM dao.impl.EarningDAOImpl getTotalEarnings
+INFO: Result from complete earnings: 211.05
+Aug 20, 2023 10:37:51 PM database.ConnectionDB getConnection
+INFO: Connected with production
+Aug 20, 2023 10:37:51 PM dao.impl.SpendingDAOImpl getTotalSpendings
+INFO: Successfully connected into production database.
+Aug 20, 2023 10:37:51 PM dao.impl.SpendingDAOImpl getTotalSpendings
+INFO: Result from complete spendings: 100.05
+Aug 20, 2023 10:37:51 PM database.ConnectionDB getConnection
+INFO: Connected with production
+Aug 20, 2023 10:37:51 PM dao.impl.EarningDAOImpl getTotalEarnings
+INFO: Successfully connected into production database.
+Aug 20, 2023 10:37:51 PM dao.impl.EarningDAOImpl getTotalEarnings
+INFO: Result from complete earnings: 211.05
+Aug 20, 2023 10:37:51 PM database.ConnectionDB getConnection
+INFO: Connected with production
+Aug 20, 2023 10:37:51 PM dao.impl.SpendingDAOImpl getTotalSpendings
+INFO: Successfully connected into production database.
+Aug 20, 2023 10:37:51 PM dao.impl.SpendingDAOImpl getTotalSpendings
+INFO: Result from complete spendings: 100.05

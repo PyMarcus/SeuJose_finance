@@ -3,18 +3,64 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
+import control.EarningController;
+import control.FinanceController;
+import control.SpendingController;
+import model.Finance;
+import util.DateParse;
+import util.UUIDParser;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+import java.util.UUID;
+import java.util.Vector;
 
 /**
  *
  * @author saulo.cabral
  */
 public class FrameApp extends javax.swing.JFrame {
+    private Vector<Finance> finances;
+    private final static String ENVIROMENT = "production";
+    private FinanceController financeController = new FinanceController(ENVIROMENT);
+    private EarningController earningsController = new EarningController(ENVIROMENT);
+    private SpendingController spendingController = new SpendingController(ENVIROMENT);
 
     /**
      * Creates new form FrameApp
      */
     public FrameApp() {
+        // load data, if exists
+        finances = financeController.getAllFinances();
+        // start components
         initComponents();
+
+        // alerts and hidden components, if there is not data
+        if(finances.size() == 0){
+            alertNoData();
+            recebidoTxt.setVisible(false);
+            gastoTxt.setVisible(false);
+            diferencaTxt.setVisible(false);
+        }else{
+            recebidoTxt.setText(totalEarning());
+            gastoTxt.setText(totalSpending());
+            diferencaTxt.setText(solveDif());
+        }
+        
+        // create table
+        entradasTabela = new JTable(new ModeloTabela(finances));
+
+
+
+        // events
+        cadastrarBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnCadastrar();
+            }
+        });
     }
 
     /**
@@ -56,7 +102,7 @@ public class FrameApp extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(2));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Nome");
@@ -163,13 +209,13 @@ public class FrameApp extends javax.swing.JFrame {
         entradasTabela.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         entradasTabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nome", "Classificacao", "Valor", "Data", "Cadastro"
             }
         ));
         jScrollPane1.setViewportView(entradasTabela);
@@ -262,9 +308,65 @@ public class FrameApp extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ganhoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ganhoBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ganhoBtnActionPerformed
+    private void ganhoBtnActionPerformed(java.awt.event.ActionEvent evt) {                                         
+
+    }
+
+    private String totalEarning(){
+        return earningsController.getTotalEarning();
+    }
+
+    private String totalSpending(){
+        return spendingController.getTotalSpendings();
+    }
+
+    private String solveDif(){
+        return new DecimalFormat("0.00").format(
+                Double.parseDouble(totalEarning()) - Double.parseDouble(totalSpending())
+            );
+    }
+
+    private void btnCadastrar(){
+        String name = nomeTxt.getText();
+        String classification = classificacaoTxt.getText();
+        String valor = valorTxt.getText();
+        String data = dataTxt.getText();
+        boolean gasto = gastoBtn.isSelected();
+        boolean ganho = ganhoBtn.isSelected();
+        if(gasto && !ganho){
+            financeController.create(new Finance(
+                    UUIDParser.generateUUID(),
+                    name,
+                    classification,
+                    Double.valueOf(valor),
+                    0,
+                    data,
+                    DateParse.generateCurrentLocalTime()
+            ));
+        }else if(!gasto && ganho){
+            financeController.create(new Finance(
+                    UUIDParser.generateUUID(),
+                    name,
+                    classification,
+                    0,
+                    Double.valueOf(valor),
+                    data,
+                    DateParse.generateCurrentLocalTime()
+            ));
+        }else{
+            JOptionPane.showMessageDialog(this,
+                    "Marque apenas gasto ou cadastro!",
+                    "Atenção!!!",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void alertNoData(){
+        JOptionPane.showMessageDialog(this,
+                "Não há entradas cadastradas até o momento!",
+                "Bem vindo!",
+                JOptionPane.WARNING_MESSAGE);
+    }
 
     /**
      * @param args the command line arguments
@@ -296,7 +398,9 @@ public class FrameApp extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrameApp().setVisible(true);
+                FrameApp frame = new FrameApp();
+                //frame.getContentPane().add(scroll);;
+                frame.setVisible(true);
             }
         });
     }

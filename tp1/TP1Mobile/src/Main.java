@@ -1,29 +1,15 @@
+import control.FinanceController;
 import database.*;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Logger;
-
+import model.Finance;
+import util.UUIDParser;
 import util.FLogger;
+import util.DateParse;
 
 public class Main {
     public static void main(String[] args){
-        Connection connection = null;
-        try{
-            connection = ConnectionDB.getConnection("production");
-            Logger log = FLogger.getLogger();
-            log.info("Success!");
-            Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("select * from finances;");
-            while (result.next()){
-                System.out.println(result.getString("name"));
-            }
-        }catch (SQLException err){
-            err.printStackTrace();
-        }finally {
-            ConnectionDB.closeConnection(connection);
-        }
+        FinanceController fc = new FinanceController("production");
+        fc.create(new Finance(UUIDParser.generateUUID(), "marcus teste", "test",14.2,
+                0,
+                "20/02/2000", DateParse.generateCurrentLocalTime()));
     }
 }
