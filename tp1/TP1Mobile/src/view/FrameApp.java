@@ -37,21 +37,8 @@ public class FrameApp extends javax.swing.JFrame {
         // start components
         initComponents();
 
-        // alerts and hidden components, if there is not data
-        if(finances.size() == 0){
-            alertNoData();
-            recebidoTxt.setVisible(false);
-            gastoTxt.setVisible(false);
-            diferencaTxt.setVisible(false);
-        }else{
-            recebidoTxt.setText(totalEarning());
-            gastoTxt.setText(totalSpending());
-            diferencaTxt.setText(solveDif());
-        }
-        
-        // create table
-        entradasTabela = new JTable(new ModeloTabela(finances));
-
+        // update data on screen and create the table
+        updateData();
 
 
         // events
@@ -326,6 +313,24 @@ public class FrameApp extends javax.swing.JFrame {
             );
     }
 
+    private void updateData(){
+        // alerts and hidden components, if there is not data
+        if(finances.size() == 0){
+            alertNoData();
+            recebidoTxt.setVisible(false);
+            gastoTxt.setVisible(false);
+            diferencaTxt.setVisible(false);
+        }else{
+            recebidoTxt.setText(totalEarning());
+            gastoTxt.setText(totalSpending());
+            diferencaTxt.setText(solveDif());
+        }
+
+        // create table
+        entradasTabela = new JTable(new ModeloTabela(finances));
+
+    }
+
     private void btnCadastrar(){
         String name = nomeTxt.getText();
         String classification = classificacaoTxt.getText();
@@ -359,6 +364,7 @@ public class FrameApp extends javax.swing.JFrame {
                     "Atenção!!!",
                     JOptionPane.ERROR_MESSAGE);
         }
+        updateData();
     }
 
     private void alertNoData(){
