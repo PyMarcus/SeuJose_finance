@@ -9,8 +9,9 @@ import control.SpendingController;
 import model.Finance;
 import util.DateParse;
 import util.UUIDParser;
-
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
@@ -22,7 +23,7 @@ import java.util.Vector;
  * @author saulo.cabral
  */
 public class FrameApp extends javax.swing.JFrame {
-    private Vector<Finance> finances;
+    private static Vector<Finance> finances;
     private final static String ENVIROMENT = "production";
     private FinanceController financeController = new FinanceController(ENVIROMENT);
     private EarningController earningsController = new EarningController(ENVIROMENT);
@@ -37,15 +38,33 @@ public class FrameApp extends javax.swing.JFrame {
         // start components
         initComponents();
 
+
+
         // update data on screen and create the table
         updateData();
 
 
-        // events
+        // register events
         cadastrarBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 btnCadastrar();
+                entradasTabela.repaint();
+                updateData();
+            }
+        });
+
+        // del events
+        deletarBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = entradasTabela.getSelectedRow();
+                if(selectedRow != -1){
+                   Finance finance = finances.get(selectedRow);
+                   removerLinha(finance.getUuid());
+                   preencherTabela();
+                   updateData();
+                }
             }
         });
     }
@@ -299,6 +318,40 @@ public class FrameApp extends javax.swing.JFrame {
 
     }
 
+    private void removerLinha(UUID uuid){
+        financeController.remove(uuid);
+    }
+
+    private void preencherTabela(){
+        finances = financeController.getAllFinances();
+        if(finances.size() == 0){
+            alertNoData();
+        }
+        Finance finance = null;
+        DefaultTableModel model = (DefaultTableModel) entradasTabela.getModel();
+        model.setNumRows(0);
+
+        Object col[] = new Object[5];
+
+        for(int i = 0; i < finances.size(); i++){
+            finance = finances.get(i);
+            col[0] = finance.getName();
+            col[1] = finance.getClassification();
+            if(finance.getValueEarn() == 0){
+                col[2] = -finance.getValueSpend();
+            }else{
+                col[2] = finance.getValueEarn();
+            }
+            col[3] = finance.getDate();
+            col[4] = DateParse.parseDatetimeToString(finance.getLocalTime()).split(" ")[0];
+
+            model.addRow(col);
+        }
+
+        model.fireTableDataChanged();
+
+    }
+
     private String totalEarning(){
         return earningsController.getTotalEarning();
     }
@@ -313,22 +366,24 @@ public class FrameApp extends javax.swing.JFrame {
             );
     }
 
+    private String format(String cash){
+        return new DecimalFormat("0.00").format(Double.parseDouble(cash));
+    }
+
     private void updateData(){
         // alerts and hidden components, if there is not data
         if(finances.size() == 0){
-            alertNoData();
             recebidoTxt.setVisible(false);
             gastoTxt.setVisible(false);
             diferencaTxt.setVisible(false);
         }else{
-            recebidoTxt.setText(totalEarning());
-            gastoTxt.setText(totalSpending());
+            recebidoTxt.setText(format(totalEarning()));
+            gastoTxt.setText(format(totalSpending()));
             diferencaTxt.setText(solveDif());
+            recebidoTxt.setVisible(true);
+            gastoTxt.setVisible(true);
+            diferencaTxt.setVisible(true);
         }
-
-        // create table
-        entradasTabela = new JTable(new ModeloTabela(finances));
-
     }
 
     private void btnCadastrar(){
@@ -364,7 +419,7 @@ public class FrameApp extends javax.swing.JFrame {
                     "Atenção!!!",
                     JOptionPane.ERROR_MESSAGE);
         }
-        updateData();
+        preencherTabela();
     }
 
     private void alertNoData(){
@@ -407,6 +462,7 @@ public class FrameApp extends javax.swing.JFrame {
                 FrameApp frame = new FrameApp();
                 //frame.getContentPane().add(scroll);;
                 frame.setVisible(true);
+                frame.preencherTabela();
             }
         });
     }
@@ -417,7 +473,7 @@ public class FrameApp extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField dataTxt;
     private javax.swing.JButton deletarBtn;
     private javax.swing.JLabel diferencaTxt;
-    private javax.swing.JTable entradasTabela;
+    private static javax.swing.JTable entradasTabela;
     private javax.swing.JRadioButton ganhoBtn;
     private javax.swing.JRadioButton gastoBtn;
     private javax.swing.JLabel gastoTxt;

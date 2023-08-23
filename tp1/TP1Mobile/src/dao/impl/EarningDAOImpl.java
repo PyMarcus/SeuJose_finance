@@ -82,6 +82,25 @@ public class EarningDAOImpl implements EarningDAO {
      */
     @Override
     public void removeEarning(UUID uuid) {
+        Connection conn = null;
+        final String SQL = "DELETE FROM \n" +
+                "\tearnigns WHERE finance_id = ?;";
 
+        try{
+            conn = ConnectionDB.getConnection(this.enviroment);
+
+            flogger.info("Successfully connected into " + this.enviroment + " database.");
+
+            PreparedStatement statement = conn.prepareStatement(SQL);
+            statement.setObject(1, uuid);
+            statement.executeUpdate();
+            flogger.info("Earning has been removed!");
+        }
+        catch (SQLException err){
+            flogger.warning(err.toString());
+        }
+        finally {
+            ConnectionDB.closeConnection(conn);
+        }
     }
 }

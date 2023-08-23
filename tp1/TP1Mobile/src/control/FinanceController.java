@@ -4,15 +4,16 @@ import dao.impl.FinanceDAOImpl;
 import model.Earning;
 import model.Finance;
 import model.Spending;
+import util.FLogger;
 import util.UUIDParser;
 
+import java.util.UUID;
 import java.util.Vector;
 
 public class FinanceController {
 
     private String enviroment;
     private FinanceDAOImpl financeModel;
-    private int size;
     private EarningController earning;
     private SpendingController spending;
     public FinanceController(String enviroment){
@@ -20,11 +21,6 @@ public class FinanceController {
         this.financeModel = new FinanceDAOImpl(this.enviroment);
         this.earning = new EarningController(enviroment);
         this.spending = new SpendingController(enviroment);
-        this.size = financeModel.getSize();
-    }
-
-    public int getSize(){
-        return this.size;
     }
 
     public Vector<Finance> getAllFinances(){
@@ -38,6 +34,13 @@ public class FinanceController {
         }else{
             earning.create(new Earning(UUIDParser.generateUUID(), finace.getUuid(),finace.getValueEarn()));
         }
+    }
 
+    public void remove(UUID uuid){
+        if(uuid != null){
+            earning.remove(uuid);
+            spending.remove(uuid);
+            financeModel.removeFinance(uuid);
+        }
     }
 }

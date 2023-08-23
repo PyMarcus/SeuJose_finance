@@ -3,6 +3,8 @@ package control;
 import dao.impl.EarningDAOImpl;
 import model.Earning;
 
+import java.util.UUID;
+
 public class EarningController {
     private String enviroment;
     private EarningDAOImpl earningModel;
@@ -19,5 +21,9 @@ public class EarningController {
 
     public void create(Earning earning){
         earningModel.createEarning(earning);
+    }
+
+    public void remove(UUID uuid){
+        earningModel.removeEarning(uuid);
     }
 }

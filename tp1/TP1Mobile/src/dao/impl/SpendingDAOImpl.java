@@ -80,6 +80,25 @@ public class SpendingDAOImpl implements SpendingDAO {
      */
     @Override
     public void removeSpending(UUID uuid) {
+        Connection conn = null;
+        final String SQL = "DELETE FROM \n" +
+                "\tspendings WHERE finance_id = ?;";
 
+        try{
+            conn = ConnectionDB.getConnection(this.enviroment);
+
+            flogger.info("Successfully connected into " + this.enviroment + " database.");
+
+            PreparedStatement statement = conn.prepareStatement(SQL);
+            statement.setObject(1, uuid);
+            statement.executeUpdate();
+            flogger.info("Spending has been removed!");
+        }
+        catch (SQLException err){
+            flogger.warning(err.toString());
+        }
+        finally {
+            ConnectionDB.closeConnection(conn);
+        }
     }
 }

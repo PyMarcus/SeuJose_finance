@@ -10,6 +10,5 @@ public interface FinanceDAO {
     public Finance getFinance(long id);
     public void createFinance(Finance earning);
     public void removeFinance(UUID uuid);
-    public void removeFinance(long id);
 
 }
