@@ -349,7 +349,7 @@ public class FrameApp extends javax.swing.JFrame {
         }
 
         model.fireTableDataChanged();
-
+        pack();
     }
 
     private String totalEarning(){
