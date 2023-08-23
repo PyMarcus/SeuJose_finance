@@ -26,4 +26,9 @@ public class DateParse {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
         return formatter.format(date);
     }
+
+    public static String parseDatetimeToStringLog(LocalDateTime date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd_MM_YYYY");
+        return formatter.format(date);
+    }
 }

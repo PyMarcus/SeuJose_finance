@@ -15,7 +15,8 @@ import java.util.logging.Logger;
  */
 public class FLogger {
     private static final Logger logger = Logger.getLogger(FLogger.class.getName());
-    private final static String LOGFILE = "finances.log";
+    private final static String LOGFILE = "finances" + DateParse.parseDatetimeToStringLog(
+            DateParse.generateCurrentLocalTime()) + ".log";
 
     static{
         logger.setLevel(Level.INFO);
