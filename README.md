@@ -17,10 +17,10 @@ Por fim, foram criadas algumas classes para facilitar operações no projeto, co
 
  
 
- file:///home/marcus/Pictures/Screenshots/Screenshot%20from%202023-08-26%2012-42-35.png
 
 
- 
+ ![Screenshot from 2023-08-26 12-42-35](https://github.com/PyMarcus/SeuJose_finance/assets/88283829/b9223f09-46c6-471a-a07a-846965f6d4e4)
+
 
  
 
